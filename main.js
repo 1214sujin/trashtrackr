@@ -6,29 +6,29 @@ app.set('views', __dirname + '/views')
 app.set('view engine', 'ejs')
 
 //사용자 정의 라우터 모듈
-var rootRouter = require('./router/rootRouter')
-var userRouter = require('./router/userRouter')
-var binRouter = require('./router/binRouter')
-var loadRouter = require('./router/loadRouter')
-var fireRouter = require('./router/fireRouter')
-var useRouter = require('./router/useRouter')
-var notiRouter = require('./router/notiRouter')
+var rootRouter = require('./routers/rootRouter')
+var userRouter = require('./routers/userRouter')
+var binRouter = require('./routers/binRouter')
+var loadRouter = require('./routers/loadRouter')
+var fireRouter = require('./routers/fireRouter')
+var useRouter = require('./routers/useRouter')
+var notiRouter = require('./routers/notiRouter')
 
 // 회원 관리 기능 구현 후 주석 해제
 // const session = require('./db/session')
 // app.use(session)
 
-var bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({extended: false }))
+app.use(express.json())
+app.use(express.urlencoded( {extended : false } ))
 
 //라우터 호출
 app.use('/', rootRouter)
-app.use('/', userRouter)
-app.use('/', binRouter)
-app.use('/', loadRouter)
-app.use('/', fireRouter)
-app.use('/', useRouter)
-app.use('/', notiRouter)
+app.use('/user', userRouter)
+app.use('/bin', binRouter)
+app.use('/load', loadRouter)
+app.use('/fire', fireRouter)
+app.use('/use', useRouter)
+app.use('/noti', notiRouter)
 
 //정적 파일 폴더 지정
 app.use(express.static('public'))
