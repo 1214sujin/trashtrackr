@@ -1,4 +1,4 @@
-db = require('../db/db')
+var db = require('../db/db')
 
 module.exports = {
 	home: (req, res) => {
@@ -58,7 +58,8 @@ module.exports = {
 		console.log(bin_id, dong_id, lat, lon)
 		var sql0 = `insert into bin (bin_id, pos, lat, lon, install_date) values (?, ?, ?, ?, date_format(now(), '%Y-%m-%d'));`
 		db.query(sql0, [bin_id, dong_id, lat, lon], (err, result) =>{
-			if (err) { console.log(err)
+			if (err) {
+				console.log(err)
 				if (err.code == 'ER_BAD_NULL_ERROR') res.json({'err': '비어있는 값이 존재합니다.'})
 				else if (err.code == 'ER_DUP_ENTRY') res.json({'err': '중복된 쓰레기통 ID입니다.'})
 				else res.json({'err': err.errno})
@@ -72,6 +73,7 @@ module.exports = {
 		var sql0 = `update bin set pos=?, lat=?, lon=? where bin_id=?;`
 		db.query(sql0, [dong_id, lat, lon, bin_id], (err, result) => {
 			if (err) {
+				console.log(err)
 				if (err.code == 'ER_BAD_NULL_ERROR') res.json({'err': '비어있는 값이 존재합니다.'})
 				else res.json({'err': err.errno})
 			}
@@ -82,7 +84,10 @@ module.exports = {
 		var { bin_id } = req.params
 		var sql0 = `delete from bin where bin_id=?;`
 		db.query(sql0, [bin_id], (err, result) => {
-			if (err) res.json({'err': err.errno})
+			if (err) {
+				console.log(err)
+				res.json({'err': err.errno})
+			}
 			else res.json({'err': 0})
 		})
 	},
