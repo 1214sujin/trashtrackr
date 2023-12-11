@@ -1,3 +1,4 @@
 db/
 node_modules/
 public/쓰레기통모니터링.clip
+views/test.ejs

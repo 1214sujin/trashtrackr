@@ -15,6 +15,11 @@ var useRouter = require('./routers/useRouter')
 var notiRouter = require('./routers/notiRouter')
 var mobileRouter = require('./routers/mobileRouter')
 
+//기타 사용자 정의 모듈
+var db = require('./db/db')
+var mqtt = require('./lib/test_sub')
+var ee = require('./lib/alert')
+
 // 회원 관리 기능 구현 후 주석 해제
 // const session = require('./db/session')
 // app.use(session)
@@ -35,4 +40,12 @@ app.use('/m', mobileRouter)
 //정적 파일 폴더 지정
 app.use(express.static('public'))
 
-app.listen(port)
+app.listen(port, () => {
+	process.on('SIGINT', (sig) => {
+		mqtt.end()
+		ee.removeAllListener('event')
+		ee.removeAllListener('photo')
+		db.end()
+		process.exit()
+	}) 
+})
