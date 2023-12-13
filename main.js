@@ -20,12 +20,18 @@ var db = require('./db/db')
 var mqtt = require('./lib/test_sub')
 var ee = require('./lib/alert')
 
-// 회원 관리 기능 구현 후 주석 해제
-// const session = require('./db/session')
-// app.use(session)
+const session = require('./db/session')
+app.use(session)
 
 app.use(express.json())
 app.use(express.urlencoded( {extended : false } ))
+
+//로그인하지 않고 웹에 접속하는 경우 항상 로그인 페이지로 가도록 함
+app.use((req, res, next) => {
+	if (req.url[1]!='m' && req.url!='/login' && req.url!='/find-pw' && !req.session.logined) {
+		res.redirect('/login')	
+	} else next()
+})
 
 //라우터 호출
 app.use('/', rootRouter)

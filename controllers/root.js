@@ -1,9 +1,52 @@
-db = require('../db/db')
+var db = require('../db/db')
+const fs = require('fs')
 
 module.exports = {
-	login_home: (req, res) => {},
-	login: (req, res) => {},
-	logout: (req, res) => {},
-	find_pw_home: (req, res) => {},
-	find_pw: (req, res) => {}
+	login_home: (req, res) => {
+		res.writeHead(200, { 'Content-Type':'text/html'})
+    	res.end(fs.readFileSync(__dirname+'/../views/login.html'))
+	},
+	login: (req, res) => {
+		var { emp_id, password } = req.body
+		var sql0 = `select * from employee where emp_id=? and password=? and code='0';`
+		db.query(sql0, [emp_id, password], (err, result) => {
+			if (result.length == 1) {
+				req.session.logined = true
+				req.session.empid = emp_id
+				res.send(`<script>location.href='/bin'</script>`)
+			} else {
+				res.json({ err: 1 })
+			}
+		})
+	},
+	logout: (req, res) => {
+		req.session.destroy((err) => {
+			res.redirect('/login')
+		})
+		
+	},
+	find_pw_home: (req, res) => {
+		res.writeHead(200, { 'Content-Type':'text/html'})
+    	res.end(fs.readFileSync(__dirname+'/../views/find-pw.html'))
+	},
+	find_pw: (req, res) => {
+		var { emp_id, tel, new_pw } = req.body
+		var sql0 = `select * from employee where emp_id=? and tel=?;`
+		db.query(sql0, [emp_id, tel], (err, result) => {
+			if (result.length == 1) {
+				var sql1 = `update employee set password=? where emp_id=?`
+				db.query(sql1, [new_pw, emp_id], (err, result) => {
+					if (err) {
+						console.error(err.sqlMessage)
+						console.error(err.sql)
+						res.json({ err: err.errno })
+					} else {
+						res.json({ err: 0 })
+					}
+				})
+			} else {
+				res.json({ err: 1 })
+			}
+		})
+	}
 }
