@@ -13,5 +13,7 @@ router.post('/replacement', mobile.replace)
 router.post('/login', mobile.login)
 router.get('/info', info)
 router.post('/info', mobile.info_process)
+router.post('/find-pw', mobile.find_pw)
+router.post('/pw', mobile.pw)
 
 module.exports = router
