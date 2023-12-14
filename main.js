@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 var port = 60036
+const websocket = require('ws')
 
 app.set('views', __dirname + '/views')
 app.set('view engine', 'ejs')
@@ -44,14 +45,40 @@ app.use('/noti', notiRouter)
 app.use('/m', mobileRouter)
 
 //정적 파일 폴더 지정
-app.use(express.static('public'))
+app.use(express.static(__dirname+'/public'))
 
-app.listen(port, () => {
-	process.on('SIGINT', (sig) => {
+const server = app.listen(port, () => {
+	process.on('SIGINT', () => {
 		mqtt.end()
-		ee.removeAllListener('event')
+		ee.removeAllListener('alert-90')
+		ee.removeAllListener('alert-rp')
+		ee.removeAllListener('alert-fire')
 		ee.removeAllListener('photo')
 		db.end()
 		process.exit()
 	}) 
+})
+
+const wss = new websocket.Server({ server })
+wss.on('connection', (ws) => {
+    console.log('WS: Connected')
+	ee.on('alert-90', (bin_id) => {
+		let sql0 = `select * from loadage where (bin_id, load_time) in (select bin_id, max(load_time) from loadage group by bin_id) and bin_id=?;`
+		db.query(sql0, [bin_id], (err, result) => {
+			let data = {bin_id: result[0].bin_id, amount: result[0].amount}
+			ws.send(JSON.stringify(data))
+		})
+	})
+
+	ee.on('alert-fire', (_, bin_id) => {
+		let sql0 = `select * from fire where (bin_id, fire_time) in (select bin_id, max(fire_time) from fire group by bin_id) and bin_id=?;`
+		db.query(sql0, [bin_id], (err, result) => {
+			let data = {bin_id: result[0].bin_id}
+			ws.send(JSON.stringify(data))
+		})
+	})
+
+    ws.on('close', () =>{
+        console.log('WS: Disconnected')
+    })
 })
