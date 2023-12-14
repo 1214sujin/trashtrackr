@@ -6,10 +6,12 @@ module.exports = {
 	home: (req, res) => {
 		var sql0 = `select * from pos_gu;`
 		var sql1 = `select * from pos_dong;`
-		db.query(sql0+sql1, (err, results) => {
+		var sql2 = `select * from bin;`
+		db.query(sql0+sql1+sql2, (err, results) => {
 			var data = {
 				gu_list: results[0],
-				dong_list: results[1]
+				dong_list: results[1],
+				bin_list: results[2]
 			}
 			res.json(data)
 		})
@@ -36,18 +38,19 @@ module.exports = {
 	pic: (req, res) => {
 		var { bin_id } = req.params
 		mqtt.publish('TrashPhoto', `{"server": true,"bin_id": ${bin_id}`)
-		res.send({ image: __dirname+'/../public/loading.jpg' })
+		res.json({data: '/loading.jpg'})
 	},
 	pic_wait: (req, res) => {
-		res.setHeader({
+		res.writeHead(200, {
 			'Content-Type': 'text/event-stream',
 			'Cache-Control': 'no-cache',
 			'Connection': 'keep-alive'
 		})
 		res.flushHeaders()
-
+	
 		ee.once('photo', () => {
-			let data = {type: 'photo', data: 'monitor.jpg'}
+			let data = {type: 'photo', data: '/monitor.jpg'}
+			console.log(`${JSON.stringify(data)}`)
 			res.write(`data: ${JSON.stringify(data)}\n\n`)
 			res.end()
 		})

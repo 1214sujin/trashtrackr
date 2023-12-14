@@ -4,7 +4,22 @@ const ee = require('../lib/alert')
 module.exports = {
 	list: (req, res) => {
 		let sql0 = `select * from notification;`
-	},	// 관리자가 알림 버튼을 누른 경우(select), 확인한 경우(update), 알림을 삭제한 경우(delete)의 코드 필요
+		db.query(sql0, (err, result) => { res.json({result}) })
+	},
+	check: (req, res) => {
+		var { not_id } = req.params
+		let sql0 = "update notification set `read`=1 where not_id=?;"
+		let sql1 = `select * from notification where not_id=?;`
+		db.query(sql0+sql1, [not_id, not_id], (err, results) => {
+			if (results[1][0].type == 'rp') res.redirect(`/load/${results[1][0].bin_id}`)
+			else res.redirect(`/fire/list/${results[1][0].bin_id}`)
+		})
+	},
+	delete: (req, res) => {
+		var { not_id } = req.params
+		let sql0 = `delete from notification where not_id=?;`
+		db.query(sql0, [not_id], (err, result) => res.end())
+	},
 	alert: (req, res) => {
 		res.writeHead(200, {
 			'Content-Type': 'text/event-stream',
