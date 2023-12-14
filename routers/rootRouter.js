@@ -20,6 +20,21 @@ router.get('/photo', (req, res) => {
 	setTimeout(() => ee.emit('photo'), 1000)
 	res.json({data: '/loading.jpg'})
 })
+router.get('/photo/wait', (req, res) => {
+	res.writeHead(200, {
+		'Content-Type': 'text/event-stream',
+		'Cache-Control': 'no-cache',
+		'Connection': 'keep-alive'
+	})
+	res.flushHeaders()
+
+	ee.once('photo', () => {
+		let data = {type: 'photo', data: '/monitor.jpg'}
+		console.log(`${JSON.stringify(data)}`)
+		res.write(`data: ${JSON.stringify(data)}\n\n`)
+		res.end()
+	})
+})
 router.get('/alert-90', (req, res) => ee.emit('alert-90', 'SB0001'))
 router.get('/alert-rp', (req, res) => ee.emit('alert-rp', 3))
 router.get('/alert-fire', (req, res) => ee.emit('alert-fire', 2, 'SB0003'))

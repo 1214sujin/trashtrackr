@@ -28,12 +28,6 @@ module.exports = {
 		})
 		res.flushHeaders()
 
-		ee.on('photo', () => {
-			let data = {type: 'photo', data: '/monitor.jpg'}
-			console.log(`${JSON.stringify(data)}`)
-			res.write(`data: ${JSON.stringify(data)}\n\n`)
-		})
-	
 		ee.on('alert-rp', (id) => {
 			var sql0 = `select * from notification n join (select type, not_time from notification where not_id=?) s on n.type=s.type and n.not_time=s.not_time;`	// 특정 emp_id에 대해서 알림을 발송하면 안 되므로... code로 조회했음
 			db.query(sql0, [id], (err, result) => {
