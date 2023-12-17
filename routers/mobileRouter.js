@@ -8,8 +8,9 @@ var info = require('../controllers/bin').new
 router.get('/home', mobile.home)
 router.get('/list', mobile.list)
 router.get('/alarm', mobile.alarm)
-router.post('/replacement', mobile.replace)
-// 회원 관련 기능(로그인, )
+router.post('/replacement', mobile.replace2)
+router.post('/replacement/:bin_id', mobile.replace)
+// 회원 관리 기능
 router.post('/login', mobile.login)
 router.get('/info', info)
 router.post('/info', mobile.info_process)

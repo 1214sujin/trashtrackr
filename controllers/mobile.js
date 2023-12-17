@@ -33,19 +33,19 @@ module.exports = {
 				console.error(err.sql)
 				res.json({ err: err.errno })
 			} else {
-				var data = { err: 0, in_list: result }
+				var data = { err: 0, bin_list: result }
 				res.json(data)
 			}
 		})
 	},
 	alarm: (req, res) => {
-		var sql0 = `select l.bin_id, gu, dong, amount, l.load_time as time, null as fire, load_img as img from loadage l
-					join notified n on l.bin_id=n.bin_id and l.load_time=n.load_time
-					join bin b on b.bin_id=l.bin_id join pos_dong on pos=dong_id join pos_gu on p_gu=gu_id
-					union
-					select f.bin_id, gu, dong, null as amount, fire_time as time, 'true' as fire, fire_img as img from fire f
-					join bin b on b.bin_id=f.bin_id join pos_dong on pos=dong_id join pos_gu on p_gu=gu_id
-					group by bin_id, time order by time desc;`
+		var sql0 = "select * from (select l.bin_id, gu, dong, amount, l.load_time as time, null as fire, load_img as img from loadage l\
+					join alarm a on l.bin_id=a.bin_id and l.load_time=a.load_time\
+					join bin b on b.bin_id=l.bin_id join pos_dong on pos=dong_id join pos_gu on p_gu=gu_id\
+					union\
+					select f.bin_id, gu, dong, null as amount, fire_time as time, 'true' as fire, fire_img as img from fire f\
+					join bin b on b.bin_id=f.bin_id join pos_dong on pos=dong_id join pos_gu on p_gu=gu_id\
+					group by bin_id, time) as s order by time desc;"	// 모니터링을 위해 alarm 창에서는 모든 fire정보를 넘김 (알림은 최초만)
 		db.query(sql0, (err, result) => {
 			if (err) {
 				console.error(err.sqlMessage)
@@ -61,6 +61,22 @@ module.exports = {
 					data.alarm_list[i].img = Buffer.from(image).toString('base64')
 				}
 				res.json(data)
+			}
+		})
+	},
+	replace2: (req, res) => {
+		var { emp_id, bin_id } = req.body
+		var sql0 = `insert into replacement values (?, now(), ?);`
+		var sql1 = `insert into notification (emp_id, bin_id, type, not_time, url)
+					select distinct emp_id, ?, 'rp', now(), CONCAT('/load/', ?) from employee where code='0';`
+		db.query(sql0+sql1, [bin_id, emp_id, bin_id, bin_id], (err, results) => {
+			if (err) {
+				console.error(err.sqlMessage)
+				console.error(err.sql)
+				res.json({ err: err.errno })
+			} else {
+				ee.emit('alert-rp', results[1].insertId)
+				res.json({ err: 0 })
 			}
 		})
 	},
@@ -127,7 +143,9 @@ module.exports = {
 		})
 	},
 	find_pw: (req, res) => {
-		var { emp_id, tel, new_pw } = req.body
+		var post = req.body
+		for (let i=0; i<post.length; i++) if (post[i] == undefined) post[i] = null
+		var { emp_id, tel, new_pw } = post
 		var sql0 = `select * from employee where emp_id=? and tel=?;`
 		db.query(sql0, [emp_id, tel], (err, result) => {
 			if (result.length == 1) {
@@ -147,7 +165,9 @@ module.exports = {
 		})
 	},
 	pw: (req, res) => {
-		var { emp_id, password, new_pw } = req.body
+		var post = req.body
+		for (let i=0; i<post.length; i++) if (post[i] == undefined) post[i] = null
+		var { emp_id, password, new_pw } = post
 		var sql0 = `select * from employee where emp_id=? and password=?;`
 		db.query(sql0, [emp_id, password], (err, result) => {
 			if (result.length == 1) {
