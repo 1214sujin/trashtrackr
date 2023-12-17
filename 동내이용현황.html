@@ -16,6 +16,7 @@
     <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
     <!-- Custom Styles-->
     <link href="assets/css/custom-styles.css" rel="stylesheet" />
+    <link href="assets/css/modal.css" rel="stylesheet" />
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css"> 
@@ -36,11 +37,13 @@
             </div>
 
             <ul class="nav navbar-top-links navbar-right"> 
-				<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown4"><i class="fa fa-envelope fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>				
 				<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown2"><i class="fa fa-bell fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>
-				  <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>John Doe</b> <i class="material-icons right">arrow_drop_down</i></a></li>
+				<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>John Doe</b> <i class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
         </nav>
+
+
+
 		<!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
 <li><a href="#"><i class="fa fa-user fa-fw"></i> My Profile</a>
@@ -96,48 +99,6 @@
                             </a>
                         </li>
 </ul>
-<ul id="dropdown4" class="dropdown-content dropdown-tasks w250 taskList">
-  <li>
-                                <div>
-                                    <strong>John Doe</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Today</em>
-                                    </span>
-                                </div>
-                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <p>Lorem Ipsum has been the industry's standard dummy text ever since an kwilnw...</p>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the...</p>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>Read All Messages</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-</ul>  
 <!--nav top-->
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
@@ -256,11 +217,7 @@
                             <div class="card-action">      
                             </div>
                             <div class="card-content">
-                                <div id="morris-bar-chart" style="position: relative;">
-                                    <svg height="352" version="1.1" width="68" xmln="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative; left: -0.600037px; top: -0.200012px;">
-                                        <desc style=""
-                                    </svg>
-                                </div>
+                                <canvas id="cvs" style="width: 80%;"></canvas>
                             </div>
                         </div>
                     </div>
@@ -286,7 +243,8 @@
           <script src="assets/js/jquery.metisMenu.js"></script> 
       <!-- Custom Js -->
       <script src="assets/js/custom-scripts.js"></script> 
-      
+      <script src="assets/js/anseohyun.js"></script>
+      <script src="assets/js/modal.js"></script>
    
   
 </body>

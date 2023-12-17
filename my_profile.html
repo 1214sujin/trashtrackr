@@ -35,9 +35,9 @@
 		<div id="sideNav" class="waves-effect waves-dark" href=""><i class="material-icons dp48">toc</i></div>
             </div>
 
-            <ul class="nav navbar-top-links navbar-right"> 		
+            <ul class="nav navbar-top-links navbar-right"> 			
 				<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown2"><i class="fa fa-bell fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>
-				  <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>John Doe</b> <i class="material-icons right">arrow_drop_down</i></a></li>
+				<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>John Doe</b> <i class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
         </nav>
 		<!-- Dropdown Structure -->
@@ -95,7 +95,6 @@
                             </a>
                         </li>
 </ul>
-
 <!--nav top-->
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
@@ -107,13 +106,13 @@
                         <a href="Load_management.html" class="waves-effect waves-dark"><i class="fa fa-file"></i>적재량 관리</a>
                     </li>
                     <li>
-                        <a href="Fire_detection.html"   class="active-menu waves-effect waves-dark"><i class="fa fa-edit"></i>화재감지</a>
+                        <a href="Fire_detection.html"   class="waves-effect waves-dark"><i class="fa fa-edit"></i>화재감지</a>
                     </li>
                     <li>
                         <a href="Utilization_status.html" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i>이용현황<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="동별이용현황.html">동 별 이용현황</a>
+                                <a href="동별이용현황.html" class="active-menu waves-effect waves-dark">동 별 이용현황</a>
                             </li>
                             <li>
                                 <a href="동내이용현황.html">동 내 이용현황</a>
@@ -127,120 +126,71 @@
         <div id="page-wrapper">
             <div class="header"> 
                           <h1 class="page-header">
-                              화재감지
+                              동 별 이용현황 
                           </h1>
                           <ol class="breadcrumb">
                         <li><a href="Waste_management.html">Home</a></li>
-                        <li><a href="Fire_detection.html">화재감지</a></li>
+                        <li><a href="Utilization_status.html">이용현황</a></li>
+                        <li><a href="동별이용현황.html">동별이용현황</a></li>
                       </ol> 
                                       
           </div>
-              <div id="page-inner"> 
-                <div class="row">
-                    <div class="col-sm-6">
-                        <tbody>
-                            <tr>
-                                <th scope="row">
-                                    <label>구 : 
-                                        <label>
-                                            <select name="gu" id="trash_gu" class="form-control input-sm">
-                                                <option value="수정구">수정구</option>
-                                                <option value="중원구">중원구</option>
-                                                <option value="분당구">분당구</option>
-                                            </select>
-                                        </label>
-                                    </label>
-                                </th>
-                                <th scope="row">
-                                    <label>동 : 
-                                        <label>
-                                            <select name="dong" id="trash_dong" class="form-control input-sm">
-                                                <option value="수정동">수정동</option>
-                                                <option value="수진동">수진동</option>
-                                                <option value="태평동">태평동</option>
-                                            </select>
-                                        </label>
-                                    </label>
-                                </th>
-                                <th scope="row">
-                                    <label><input type="date"></label>
-                                    <span> ~ </span>
-                                    <label><input type="date"></label>
-                                </th>
-                            </tr>
-                        </tbody>
-    
-                        <button type="button" class="btn btn-primary color-bottom">조회</button>
+          <div id="page-inner"> 
+            <div class="row">
+                <div class="col-lg-6">
+                    <div id="tab_box" class="tab_box">
+                        <ul>
+                            <li onclick="javascript:changeTab('1')";>
+                            <a href="javascript:;">개인정보</a></li>
+                            <li onclick="javascript:changeTab('2');"><a href=javascript:;>비밀번호</a></li>
+                            <li onclick="javascript:changeTab('3')";><a href=javascript:;>회원탈퇴</a></li>
+                        </ul>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 text-center" style="width: 30%;">
-                            <div class="card-action" style="width:100">
-                                <div class="card-content" >
-                                    <ul class="collapsible" data-collapsible="accordion" >
-                                        <li>
-                                            <div class="collapsible-header">VS1234</div>
-                                        </li>
-                                        <li>
-                                            <div class="collapsible-header">VJ3942</div>
-                                        </li>
-                                    </ul>
-                                </div>
+                    <div class="sub_search_area">
+                        <div class="sub_search_box">
+                            <div id="addrTable">
+                                <ul id="infoUI">
+                                    <li>
+                                        <dl>
+                                            <dt class="tit">학번</dt>
+                                            <dd class="cont">202135992</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt class="tit">성명</dt>
+                                        </dl>
+                                    </li>
+                                </ul>
                             </div>
-                    </div>
-            
-                    <div class="col-md-6 col-sm-6 text-right" style="width: 70%;">
-                        <div class="card">
-                            <div class="card-action" >
-                                쓰레기통 상세정보
-                            </div>
-                            
                         </div>
                     </div>
                 </div>
             </div>
-            
-    
-    
-    
-                        </div>
-                        
-                                          
+        </div>
+
+
+
+
+
+           <!-- /. PAGE WRAPPER  -->
+          </div>
+       <!-- /. WRAPPER  -->
+      <!-- JS Scripts-->
+      <!-- jQuery Js -->
+      <script src="assets/js/jquery-1.10.2.js"></script>
       
-    
-    
-    
-    
-    
-    
-    
-    
-    
-                      </div>
-                   <!-- /. PAGE INNER  -->
-                  </div>
-               <!-- /. PAGE WRAPPER  -->
-              </div>
-           <!-- /. WRAPPER  -->
-          <!-- JS Scripts-->
-          <!-- jQuery Js -->
-    
-          <script src="assets/js/jquery-1.10.2.js"></script>
-          <!-- Bootstrap Js -->
-          <script src="assets/js/bootstrap.min.js"></script>
-          
-          <script src="assets/materialize/js/materialize.min.js"></script>
-          
-          <!-- Metis Menu Js -->
-              <script src="assets/js/jquery.metisMenu.js"></script> 
-          <!-- Custom Js -->
-          <script src="assets/js/custom-scripts.js"></script> 
-          <script src="assets/js/쓰레기통_관리.js"></script>
-    
-          
-       
+      <!-- Bootstrap Js -->
+      <script src="assets/js/bootstrap.min.js"></script>
       
-    </body>
-    
-    </html>
-    
+      <script src="assets/materialize/js/materialize.min.js"></script>
+      
+      <!-- Metis Menu Js -->
+          <script src="assets/js/jquery.metisMenu.js"></script> 
+      <!-- Custom Js -->
+      <script src="assets/js/custom-scripts.js"></script> 
+      <script src="assets/js/anseohyun.js"></script>
+      
+   
+  
+</body>
+
+</html>
