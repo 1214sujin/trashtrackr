@@ -1,0 +1,43 @@
+<style>
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+    }
+
+    .tabs {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+    }
+
+    .tab-link {
+        flex: 1;
+        text-align: center;
+        padding: 10px;
+        background-color: #2c3e50;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .tab-link:hover {
+        background-color: #2c3e50;
+    }
+
+    .tab-link.current {
+        background-color: #f44336;
+    }
+
+    .tab-content {
+        text-align: center;
+        display: none;
+        padding: 20px;
+        border: 1px solid #ddd;
+    }
+
+    .tab-content.current {
+        display: block;
+    }
+</style>
