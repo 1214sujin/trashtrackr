@@ -9,7 +9,9 @@ module.exports = {
 		})
 	},
 	info_process: (req, res) => {
-		var { password, name, tel } = req.body
+		var post = req.body
+		for (let i=0; i<post.length; i++) if (post[i] == undefined) post[i] = null
+		var { password, name, tel } = post
 		var sql0 = `select * from employee where emp_id=? and password=?;`
 		db.query(sql0, [req.session.empid, password], (err, result) => {
 			if (result.length == 1) {
@@ -33,7 +35,9 @@ module.exports = {
     	res.end(fs.readFileSync(__dirname+'/../views/pw.html'))
 	},
 	pw_process: (req, res) => {
-		var { password, new_pw } = req.body
+		var post = req.body
+		for (let i=0; i<post.length; i++) if (post[i] == undefined) post[i] = null
+		var { password, new_pw } = post
 		var sql0 = `select * from employee where emp_id=? and password=?;`
 		db.query(sql0, [req.session.empid, password], (err, result) => {
 			if (result.length == 1) {

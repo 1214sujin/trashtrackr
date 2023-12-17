@@ -3,6 +3,7 @@ const router = express.Router()
 const fs = require('fs')
 
 var root = require('../controllers/root')
+//test
 var ee = require('../lib/alert')
 
 router.get('/login', root.login_home)
@@ -38,6 +39,5 @@ router.get('/photo/wait', (req, res) => {
 router.get('/alert-90', (req, res) => ee.emit('alert-90', 'SB0001'))
 router.get('/alert-rp', (req, res) => ee.emit('alert-rp', 3))
 router.get('/alert-fire', (req, res) => ee.emit('alert-fire', 2, 'SB0003'))
-
 
 module.exports = router

@@ -21,7 +21,8 @@ module.exports = {
 	},
 	logout: (req, res) => {
 		req.session.destroy((err) => {
-			res.redirect('/login')
+			if (err) res.json({ err: 1 })
+			else res.redirect('/login')
 		})
 		
 	},
@@ -30,7 +31,9 @@ module.exports = {
     	res.end(fs.readFileSync(__dirname+'/../views/find-pw.html'))
 	},
 	find_pw: (req, res) => {
-		var { emp_id, tel, new_pw } = req.body
+		var post = req.body
+		for (let i=0; i<post.length; i++) if (post[i] == undefined) post[i] = null
+		var { emp_id, tel, new_pw } = post
 		var sql0 = `select * from employee where emp_id=? and tel=?;`
 		db.query(sql0, [emp_id, tel], (err, result) => {
 			if (result.length == 1) {

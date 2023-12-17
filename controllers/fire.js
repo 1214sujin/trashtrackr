@@ -34,6 +34,8 @@ module.exports = {
 		var { bin_id } = req.params
 		var { start, end } = req.query
 		var sql0 = `select distinct date_format(fire_time, '%Y-%m-%d') from fire where bin_id=? and ?<=date_format(fire_time, '%Y-%m')<=?;`
+		// start, end가 없으면 DB 상 전체 기간에 대하여 조회
+		if (start == undefined || end == undefined) var sql0 = `select distinct date_format(fire_time, '%Y-%m-%d') from fire where bin_id=?;`
 		db.query(sql0, [bin_id, start, end], (err, result) => {
 			if (err) {
 				console.error(err.sqlMessage)
