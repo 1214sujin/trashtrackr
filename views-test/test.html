@@ -42,7 +42,7 @@
 				fetch('/photo')	//'/load/pic/:bin_id'
 					.then(res => res.json())
 					.then(res => {
-						document.getElementById('ajax').innerHTML = `<img src="${res.data}" alt="모니터링 이미지">`
+						document.getElementById('ajax').innerHTML = `<img src="/loading.jpg" alt="모니터링 이미지">`
 					})
 					.catch(err => console.error('Error:', err))
 				const eventPhoto = new EventSource('/photo/wait')	//'/load/pic/wait'

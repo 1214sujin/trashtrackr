@@ -15,7 +15,7 @@ router.post('/find-pw', root.find_pw)
 //TEST
 router.get('/test', (req, res) => {
 	res.writeHead(200, { 'Content-Type':'text/html'})
-	res.end(fs.readFileSync(__dirname+'/../views/test.html'))
+	res.end(fs.readFileSync(__dirname+'/../views-test/test.html'))
 })
 router.get('/photo', (req, res) => {
 	setTimeout(() => ee.emit('photo'), 1000)
