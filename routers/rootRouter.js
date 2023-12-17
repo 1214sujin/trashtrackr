@@ -6,6 +6,7 @@ var root = require('../controllers/root')
 //test
 var ee = require('../lib/alert')
 
+router.get('/', (req, res) => { res.redirect('/login') })
 router.get('/login', root.login_home)
 router.post('/login', root.login)
 router.get('/logout', root.logout)
