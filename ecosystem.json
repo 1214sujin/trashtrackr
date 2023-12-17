@@ -1,0 +1,10 @@
+{
+	"apps": [{
+    "name": "trtr",
+    "script": "main.js",
+    "watch": true,
+    "watch_options": {
+        "dot": true
+    },
+    "ignore_watch": ["public/*", ".git/*", "node_modules"]
+}]}
