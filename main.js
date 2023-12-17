@@ -18,7 +18,7 @@ var mobileRouter = require('./routers/mobileRouter')
 
 //기타 사용자 정의 모듈
 var db = require('./db/db')
-var mqtt = require('./lib/test_sub')
+var mqtt = require('./lib/mqtt')
 var ee = require('./lib/alert')
 
 const session = require('./db/session')

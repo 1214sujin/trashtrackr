@@ -1,5 +1,6 @@
 const fs = require('fs')
-var db = require('../db/db')
+const db = require('../db/db')
+const ee = require('../lib/alert')
 
 module.exports = {
 	home: (req, res) => {
@@ -64,14 +65,19 @@ module.exports = {
 		})
 	},
 	replace: (req, res) => {
-		var { emp_id, bin_id } = req.body
-		var sql0 = `insert into replacement values(?, now(), ?)`
-		db.query(sql0, [bin_id, emp_id], (err, result) => {
+		var { bin_id } = req.params
+		var { emp_id } = req.body
+		if (emp_id == undefined) { res.end(); return }
+		var sql0 = `insert into replacement values (?, now(), ?);`
+		var sql1 = `insert into notification (emp_id, bin_id, type, not_time, url)
+					select distinct emp_id, ?, 'rp', now(), CONCAT('/load/', ?) from employee where code='0';`
+		db.query(sql0+sql1, [bin_id, emp_id, bin_id, bin_id], (err, results) => {
 			if (err) {
 				console.error(err.sqlMessage)
 				console.error(err.sql)
 				res.json({ err: err.errno })
 			} else {
+				ee.emit('alert-rp', results[1].insertId)
 				res.json({ err: 0 })
 			}
 		})

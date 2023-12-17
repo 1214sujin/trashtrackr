@@ -1,5 +1,5 @@
 var db = require('../db/db')
-var mqtt = require('../lib/test_sub')
+var mqtt = require('../lib/mqtt')
 var ee = require('../lib/alert')
 
 module.exports = {
