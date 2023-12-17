@@ -4,7 +4,7 @@ const fs = require('fs')
 module.exports = {
 	login_home: (req, res) => {
 		res.writeHead(200, { 'Content-Type':'text/html'})
-    	res.end(fs.readFileSync(__dirname+'/../views/login.html'))
+    	res.end(fs.readFileSync(__dirname+'/../views/log_in.html'))
 	},
 	login: (req, res) => {
 		var { emp_id, password } = req.body

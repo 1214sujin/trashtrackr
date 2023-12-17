@@ -7,19 +7,18 @@
     <title>Target Material Design Bootstrap Admin Template</title>
 	
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="assets/materialize/css/materialize.min.css" media="screen,projection" />
+	<link rel="stylesheet" href="/materialize/css/materialize.min.css" media="screen,projection" />
     <!-- Bootstrap Styles-->
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="/css/bootstrap.css" rel="stylesheet" />
     <!-- FontAwesome Styles-->
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="/css/font-awesome.css" rel="stylesheet" />
     <!-- Morris Chart Styles-->
-    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <link href="/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
     <!-- Custom Styles-->
-    <link href="assets/css/custom-styles.css" rel="stylesheet" />
-    <link href="assets/css/modal.css" rel="stylesheet" />
+    <link href="/css/custom-styles.css" rel="stylesheet" />
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css"> 
+    <link rel="stylesheet" href="/js/Lightweight-Chart/cssCharts.css"> 
 </head>
 <body>
     <div id="wrapper">
@@ -36,14 +35,11 @@
 		<div id="sideNav" class="waves-effect waves-dark" href=""><i class="material-icons dp48">toc</i></div>
             </div>
 
-            <ul class="nav navbar-top-links navbar-right"> 
+            <ul class="nav navbar-top-links navbar-right"> 			
 				<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown2"><i class="fa fa-bell fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>
 				<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>John Doe</b> <i class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
         </nav>
-
-
-
 		<!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
 <li><a href="#"><i class="fa fa-user fa-fw"></i> My Profile</a>
@@ -116,10 +112,10 @@
                         <a href="Utilization_status.html" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i>이용현황<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="동별이용현황.html" >동 별 이용현황</a>
+                                <a href="동별이용현황.html" class="active-menu waves-effect waves-dark">동 별 이용현황</a>
                             </li>
                             <li>
-                                <a href="동내이용현황.html" class="active-menu waves-effect waves-dark">동 내 이용현황</a>
+                                <a href="동내이용현황.html">동 내 이용현황</a>
                             </li>
                         </ul>
                     </li>
@@ -130,12 +126,12 @@
         <div id="page-wrapper">
             <div class="header"> 
                           <h1 class="page-header">
-                              동 내 이용현황 
+                              동 별 이용현황 
                           </h1>
                           <ol class="breadcrumb">
                         <li><a href="Waste_management.html">Home</a></li>
                         <li><a href="Utilization_status.html">이용현황</a></li>
-                        <li><a href="동내이용현황.html">동내이용현황</a></li>
+                        <li><a href="동별이용현황.html">동별이용현황</a></li>
                       </ol> 
                                       
           </div>
@@ -182,45 +178,50 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="card">
                             <div class="card-action">
-                                분당구 내 쓰레기통 교체 수 상위5
+                                복정동 내 쓰레기통 교체 수 상위5
                             </div>
                             <div class="card-content">
                                 <ul class="collapsible" data-collapsible="accordion">
                                     <li>
-                                        <div class="collapsible-header">TOP1 구미동 평균 15,200회</div>
-                                        <div class="collapsible-header">TOP1 궁내동 평균 15,002회</div>
-                                        <div class="collapsible-header">TOP1 금곡동 평균 14,874회</div>
-                                        <div class="collapsible-header">TOP1 백현동 평균 12,291회</div>
-                                        <div class="collapsible-header">TOP1 도촌동 평균 12,200회</div>
+                                        <div class="collapsible-header">TOP1 VF1290   평균 15,200회</div>
+                                        <div class="collapsible-header">TOP2 VF893    평균 15,002회</div>
+                                        <div class="collapsible-header">TOP3 VF093    평균 14,874회</div>
+                                        <div class="collapsible-header">TOP4 VF3143   평균 12,219회</div>
+                                        <div class="collapsible-header">TOP5  F1234   평균 12,200회</div>
                                     </li>
                                 </ul>
                             </div>
     
                             <div class="card-action">
-                                분당구 내 쓰레기통 교체 수 하위5
+                                복정동 내 쓰레기통 교체 수 하위5
                             </div>
                             <div class="card-content">
                                 <ul class="collapsible" data-collapsible="accordion">
                                     <li>
-                                        <div class="collapsible-header">TOP1 삼평동 평균 5,234회</div>
-                                        <div class="collapsible-header">TOP1 서현동 평균 5,300회</div>
-                                        <div class="collapsible-header">TOP1 수내동 평균 5,903회</div>
-                                        <div class="collapsible-header">TOP1 야탑동 평균 6,219회</div>
-                                        <div class="collapsible-header">TOP1 율동 평균 6,298회</div>
+                                        <div class="collapsible-header">TOP1 VF1340    평균 5,234회</div>
+                                        <div class="collapsible-header">TOP2 VF1234    평균 5,300회</div>
+                                        <div class="collapsible-header">TOP3   VF120    평균 5,903회</div>
+                                        <div class="collapsible-header">TOP4 VF3877    평균 6,219회</div>
+                                        <div class="collapsible-header">TOP5   VF356   평균 6,298회</div>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="card">
-                            <div class="card-action">      
+                            <div class="card-action">
+                                휴지통 이름
                             </div>
                             <div class="card-content">
                                 <canvas id="cvs" style="width: 80%;"></canvas>
                             </div>
                         </div>
                     </div>
+
+
+
             </div>
 
 
@@ -232,19 +233,19 @@
        <!-- /. WRAPPER  -->
       <!-- JS Scripts-->
       <!-- jQuery Js -->
-      <script src="assets/js/jquery-1.10.2.js"></script>
+      <script src="/js/jquery-1.10.2.js"></script>
       
       <!-- Bootstrap Js -->
-      <script src="assets/js/bootstrap.min.js"></script>
+      <script src="/js/bootstrap.min.js"></script>
       
-      <script src="assets/materialize/js/materialize.min.js"></script>
+      <script src="/materialize/js/materialize.min.js"></script>
       
       <!-- Metis Menu Js -->
-          <script src="assets/js/jquery.metisMenu.js"></script> 
+          <script src="/js/jquery.metisMenu.js"></script> 
       <!-- Custom Js -->
-      <script src="assets/js/custom-scripts.js"></script> 
-      <script src="assets/js/anseohyun.js"></script>
-      <script src="assets/js/modal.js"></script>
+      <script src="/js/custom-scripts.js"></script> 
+      <script src="/js/anseohyun.js"></script>
+      
    
   
 </body>
