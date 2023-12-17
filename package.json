@@ -4,16 +4,20 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "pm2 start main.js --watch && pm2 log --lines 1",
+    "start": "pm2 start ecosystem.json && pm2 log --lines 1",
     "stop": "pm2 stop all",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ejs": "^3.1.9",
+    "events": "^3.3.0",
     "express": "^4.18.2",
     "express-mysql-session": "^3.0.0",
     "express-session": "^1.17.3",
-    "mysql": "^2.18.1"
+    "mqtt": "^5.3.3",
+    "mysql": "^2.18.1",
+    "ws": "^8.15.1"
   }
 }

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>테스트</title>
+    </head>
+    <body>
+		<button onclick="photo()">사진 불러오기</button>
+        <div id="sse"></div>
+		<button onclick="arp()">alert-rp</button>
+		<button onclick="afire()">alert-fire</button>
+		<button onclick="a90()">alert-90</button>
+		<div id="ws"></div>
+        <div id="ajax"></div>
+		
+		<script>
+			const eventSource = new EventSource('/noti/alert')
+			eventSource.onmessage = (event) => {
+				var d = JSON.parse(event.data).data
+				if (d.type == 'rp') document.getElementById('sse').innerHTML = `${d.bin_id}의 봉투를 교체하였습니다.`
+				else document.getElementById('sse').innerHTML = `${d.bin_id}에서 화재가 발생하였습니다.`
+			}
+			eventSource.onerror = (err) => {
+				console.error('SSE Error:', err)
+			}
+
+			const wsConnect = () => {
+				const ws = new WebSocket('ws://localhost:60036')
+				ws.onmessage = (event) => {
+					const d = JSON.parse(event.data)
+					console.log(d)
+					if (d.amount) document.getElementById('ws').innerHTML = `${d.bin_id}의 봉투 교체가 필요합니다.`
+					else document.getElementById('ws').innerHTML = `${d.bin_id}에서 화재가 발생하였습니다.`
+				}
+				ws.onclose = () =>{
+					setTimeout(wsConnect, 1000)
+				}
+			}
+			wsConnect()
+
+			function photo() {
+				fetch('/photo')	//'/load/pic/:bin_id'
+					.then(res => res.json())
+					.then(res => {
+						document.getElementById('ajax').innerHTML = `<img src="${res.data}" alt="모니터링 이미지">`
+					})
+					.catch(err => console.error('Error:', err))
+				const eventPhoto = new EventSource('/photo/wait')	//'/load/pic/wait'
+				eventPhoto.onmessage = (event) => {
+					var res = JSON.parse(event.data)
+					document.getElementById('ajax').innerHTML = `<img src="${res.data}" alt="모니터링 이미지" width="300" height="300">`
+					eventPhoto.close()
+				}
+			}
+			var arp = () => { fetch('/alert-rp') }
+			var afire = () => { fetch('/alert-fire') }
+			var a90 = () => { fetch('/alert-90') }
+		</script>
+    </body>
+</html>

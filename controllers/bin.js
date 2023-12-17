@@ -7,12 +7,12 @@ module.exports = {
 		var sql2 = `select * from bin;`
 		db.query(sql0+sql1+sql2, (err, results) => {
 			var context = {
-				'gu_list': results[0],
-				'dong_list': results[1],
-				'bin_list': results[2]
+				gu_list: results[0],
+				dong_list: results[1],
+				bin_list: results[2]
 			}
 			res.json(context)
-			// req.app.render('bin-home', context, (err, html) => res.send(html))
+			// req.app.render('test', context, (err, html) => res.send(html))
 		})
 	},
 	list: (req, res) => {
@@ -20,7 +20,7 @@ module.exports = {
 		var sql0 = `select bin_id from bin where pos=?;`
 		db.query(sql0, [dong_id], (err, result) => {
 			var data = {
-				'bin_id': result
+				bin_id: result
 			}
 			res.json(data)
 		})
@@ -34,10 +34,10 @@ module.exports = {
 		var sql3 = `select name from bin b inner join employee e on e.pos=b.pos where bin_id=?;`
 		db.query(sql0+sql1+sql2+sql3, [bin_id, bin_id], (err, results) => {
 			var data = {
-				'gu_list': results[0],
-				'dong_list': results[1],
-				'bin': results[2],
-				'emp_name': results[3]
+				gu_list: results[0],
+				dong_list: results[1],
+				bin: results[2],
+				emp_name: results[3]
 			}
 			res.json(data)
 		})
@@ -47,37 +47,43 @@ module.exports = {
 		var sql1 = `select * from pos_dong;`
 		db.query(sql0+sql1, (err, results) => {
 			var data = {
-				'gu_list': results[0],
-				'dong_list': results[1]
+				gu_list: results[0],
+				dong_list: results[1]
 			}
 			res.json(data)
 		})
 	},
 	create: (req, res) => {
-		var { bin_id, dong_id, lat, lon } = req.body
+		var post = req.body
+		for (let i=0; i<post.length; i++) if (post[i] == undefined) post[i] = null
+		var { bin_id, dong_id, lat, lon } = post
 		console.log(bin_id, dong_id, lat, lon)
 		var sql0 = `insert into bin (bin_id, pos, lat, lon, install_date) values (?, ?, ?, ?, date_format(now(), '%Y-%m-%d'));`
 		db.query(sql0, [bin_id, dong_id, lat, lon], (err, result) =>{
 			if (err) {
-				console.log(err)
-				if (err.code == 'ER_BAD_NULL_ERROR') res.json({'err': '비어있는 값이 존재합니다.'})
-				else if (err.code == 'ER_DUP_ENTRY') res.json({'err': '중복된 쓰레기통 ID입니다.'})
-				else res.json({'err': err.errno})
+				console.error(err.sqlMessage)
+				console.error(err.sql)
+				if (err.code == 'ER_BAD_NULL_ERROR') res.json({err: '비어있는 값이 존재합니다.'})
+				else if (err.code == 'ER_DUP_ENTRY') res.json({err: '중복된 쓰레기통 ID입니다.'})
+				else res.json({err: err.errno})
 			}
-			else res.json({'err': 0})
+			else res.json({err: 0})
 		})
 	},
 	update: (req, res) => {
 		var { bin_id } = req.params
-		var { dong_id, lat, lon } = req.body
+		var post = req.body
+		for (let i=0; i<post.length; i++) if (post[i] == undefined) post[i] = null
+		var { dong_id, lat, lon } = post
 		var sql0 = `update bin set pos=?, lat=?, lon=? where bin_id=?;`
 		db.query(sql0, [dong_id, lat, lon, bin_id], (err, result) => {
 			if (err) {
-				console.log(err)
-				if (err.code == 'ER_BAD_NULL_ERROR') res.json({'err': '비어있는 값이 존재합니다.'})
-				else res.json({'err': err.errno})
+				console.error(err.sqlMessage)
+				console.error(err.sql)
+				if (err.code == 'ER_BAD_NULL_ERROR') res.json({err: '비어있는 값이 존재합니다.'})
+				else res.json({err: err.errno})
 			}
-			else res.json({'err': 0})
+			else res.json({err: 0})
 		})
 	},
 	delete: (req, res) => {
@@ -85,10 +91,11 @@ module.exports = {
 		var sql0 = `delete from bin where bin_id=?;`
 		db.query(sql0, [bin_id], (err, result) => {
 			if (err) {
-				console.log(err)
-				res.json({'err': err.errno})
+				console.error(err.sqlMessage)
+				console.error(err.sql)
+				res.json({err: err.errno})
 			}
-			else res.json({'err': 0})
+			else res.json({err: 0})
 		})
 	},
 }
