@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Target Material Design Bootstrap Admin Template</title>
+	
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="assets/materialize/css/materialize.min.css" media="screen,projection" />
+    <!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- Morris Chart Styles-->
+    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css"> 
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=w9r7i54m41"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand waves-effect waves-dark" href="Waste_management.html"><i class="large material-icons">track_changes</i> <strong>TrashTrackr</strong></a>
+				
+		<div id="sideNav" class="waves-effect waves-dark" href=""><i class="material-icons dp48">toc</i></div>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right"> 			
+				<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown2"><i class="fa fa-bell fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>
+				  <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>John Doe</b> <i class="material-icons right">arrow_drop_down</i></a></li>
+            </ul>
+        </nav>
+		<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+<li><a href="my_profile.html"><i class="fa fa-user fa-fw"></i> My Profile</a>
+</li>
+<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+</li> 
+<li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+</li>
+</ul>
+
+<ul id="dropdown2" class="dropdown-content w250">
+    <li>
+        <a href="#">
+            <div>
+                <i class="fa fa-comment fa-fw"></i> 화재감지 발생
+                <span class="pull-right text-muted small">4 min ago</span>
+            </div>
+        </a>
+    </li>
+    <li class="divider"></li>
+    <li>
+        <a href="#">
+            <div>
+                <i class="fa fa-envelope fa-fw"></i> 쓰레기통 봉투 교체 발생
+                <span class="pull-right text-muted small">43 min ago</span>
+            </div>
+        </a>
+    </li>
+    <li class="divider"></li>
+    <li>
+        <a href="#">
+            <div>
+                <i class="fa fa-envelope fa-fw"></i> 쓰레기통 봉투 교체 발생
+                <span class="pull-right text-muted small">4 hour ago</span>
+            </div>
+        </a>
+    </li>
+    <li class="divider"></li>
+    <li>
+        <a href="#">
+            <div>
+                <i class="fa fa-comment fa-fw"></i> 화재 감지 발생
+                <span class="pull-right text-muted small">14 day ago</span>
+            </div>
+        </a>
+    </li>
+    <li class="divider"></li>
+    <li>
+        <a class="text-center" href="#">
+            <strong>See All Alerts</strong>
+            <i class="fa fa-angle-right"></i>
+        </a>
+    </li>
+</ul>
+<!--nav top-->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li>
+                        <a href="Waste_management.html" class="active-menu waves-effect waves-dark"><i class="fa fa-desktop"></i>쓰레기통 관리</a>
+                    </li>
+                    <li>
+                        <a href="Load_management.html" class="waves-effect waves-dark"><i class="fa fa-desktop"></i>적재량 관리</a>
+                    </li>
+                    <li>
+                        <a href="Fire_detection.html" class="waves-effect waves-dark"><i class="fa fa-desktop"></i>화재감지</a>
+                    </li>
+                    <li>
+                        <a href="Utilization_status.html" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i>이용현황<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">동 별 이용현황</a>
+                            </li>
+                            <li>
+                                <a href="#">동 내 이용현황</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!--nav side, 위치 설명-->
+        <div id="page-wrapper">
+            <div class="header"> 
+                          <h1 class="page-header">
+                              쓰레기통 관리
+                          </h1>
+                          <ol class="breadcrumb">
+                        <li><a href="Waste_management.html">Home</a></li>
+                        <li><a href="Utilization_status.html">쓰레기 관리</a></li>
+                      </ol> 
+                                      
+          </div>
+          <div id="page-inner">
+            <div class="row">
+                <div class="col-sm-6">
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label>구 : 
+                                    <label>
+                                        <select name="gu" id="trash_gu" class="form-control input-sm">
+                                            <option value="수정구">수정구</option>
+                                            <option value="중원구">중원구</option>
+                                            <option value="분당구">분당구</option>
+                                        </select>
+                                    </label>
+                                </label>
+                            </th>
+                            <th scope="row">
+                                <label>동 : 
+                                    <label>
+                                        <select name="dong" id="trash_dong" class="form-control input-sm">
+                                            <option value="수정동">수정동</option>
+                                            <option value="수진동">수진동</option>
+                                            <option value="태평동">태평동</option>
+                                        </select>
+                                    </label>
+                                </label>
+                            </th>
+                        </tr>
+                    </tbody>
+
+                    <button type="button" class="btn btn-primary color-bottom">조회</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 text-center" style="width: 30%;">
+                    쓰레기통 목록
+                        <div class="card-action" style="width:100">
+                            <div class="card-content" >
+                                <ul class="collapsible" data-collapsible="accordion" >
+                                    <li>
+                                        <div class="collapsible-header">VS1234</div>
+                                    </li>
+                                    <li>
+                                        <div class="collapsible-header">VJ3942</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                </div>
+        
+                <div class="col-md-6 col-sm-6 text-right" style="width: 70%;">
+                    <button type="button" class="btn btn-primary color-bottom">신규</button>
+                    <button type="button" class="btn btn-info color-bottom">삭제</button>
+                    <button type="button" class="btn btn-danger color-bottom">저장</button>
+
+                    <div class="card">
+                        <div class="card-action" >
+                            쓰레기통 상세정보
+                            <div id="map" style="width:100%;height:300px;"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+                    </div>
+                    
+                                      
+  
+
+
+
+
+
+
+
+
+
+                  </div>
+               <!-- /. PAGE INNER  -->
+              </div>
+           <!-- /. PAGE WRAPPER  -->
+          </div>
+       <!-- /. WRAPPER  -->
+      <!-- JS Scripts-->
+      <!-- jQuery Js -->
+
+      <script src="assets/js/jquery-1.10.2.js"></script>
+      <!-- Bootstrap Js -->
+      <script src="assets/js/bootstrap.min.js"></script>
+      
+      <script src="assets/materialize/js/materialize.min.js"></script>
+      
+      <!-- Metis Menu Js -->
+          <script src="assets/js/jquery.metisMenu.js"></script> 
+      <!-- Custom Js -->
+      <script src="assets/js/custom-scripts.js"></script> 
+      <script src="assets/js/쓰레기통_관리.js"></script>
+      <script src="assets/js/maps.js"></script>
+      <script src="assets/js/modal.js"></script>
+      
+   
+  
+</body>
+
+</html>
