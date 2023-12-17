@@ -546,7 +546,8 @@ ul.dropdown-menu.dropdown-messages li a div {
 	text-transform:uppercase;
 }
 .collection .collection-item{
-	padding: 16px 20px;
+	
+padding: 16px 20px;
 }
 /*----------------------------------------------
     UI ELEMENTS STYLES     
@@ -685,9 +686,12 @@ font-size: 19px;
 	color: #f44336;
 }
 .dropdown-content li{
-	padding: 15px;
-	color: #233342;
-	font-size: 13px;
+	
+padding: 15px;
+	
+color: #233342;
+	
+font-size: 13px;
 }
 .taskList li{padding: 20px 15px 5px;background: #fff;font-size: 12px;}
 .taskList > div{
@@ -738,3 +742,90 @@ padding: 0 15px 0px 15px;
 			padding:17px 9px;
 		}
  }
+
+
+
+ .passwd {
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+    
+    table {
+        width: 70%; /* 더 작은 너비로 조절 */
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-spacing: 0; /* 표의 양 쪽이 뚫린 디자인을 위해 border-spacing을 0으로 설정 */
+        margin: 20px;
+    }
+    
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    input {
+        width: 20%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    
+    .btn {
+        background-color: #333;
+        color: #fff;
+        padding: 6px; /* 더 작은 패딩으로 조절 */
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    .btn:hover {
+        background-color: #555;
+    }
+    
+ }
+
+ #infoll {
+    list-style: none;
+    padding: 0;
+}
+
+#infoll li {
+    margin-bottom: 20px;
+}
+
+.info-container {
+    display: flex;
+    background-color: #f4f4f4; /* 연한 회색 배경색 */
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.info-item {
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.tit {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.cont {
+    margin: 0;
+}
+
