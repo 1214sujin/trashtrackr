@@ -5,6 +5,7 @@ var load = require('../controllers/load')
 
 router.get('/', load.home)
 router.get('/:bin_id', load.view)
-router.get('/pic/:bin_id', load.picture)
+router.get('/pic/:bin_id', load.pic)
+router.get('/pic/wait', load.pic_wait)
 
 module.exports = router
