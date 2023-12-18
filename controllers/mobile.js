@@ -1,6 +1,7 @@
 const fs = require('fs')
 const db = require('../db/db')
 const ee = require('../lib/alert')
+const mqtt = require('../lib/mqtt')
 
 module.exports = {
 	home: (req, res) => {
@@ -57,7 +58,7 @@ module.exports = {
 					'alarm_list': result,
 				}
 				for (let i=0; i<result.length; i++) {
-					let image = fs.readFileSync(__dirname+'/../public/'+result[i].img);
+					let image = fs.readFileSync(__dirname+'/../public/images/'+result[i].img);
 					data.alarm_list[i].img = Buffer.from(image).toString('base64')
 				}
 				res.json(data)
@@ -66,6 +67,8 @@ module.exports = {
 	},
 	replace2: (req, res) => {
 		var { emp_id, bin_id } = req.body
+		console.log('Replace2:', emp_id, bin_id)
+		if (emp_id == undefined || bin_id == undefined) { res.json({ err: 1 }); return }
 		var sql0 = `insert into replacement values (?, now(), ?);`
 		var sql1 = `insert into notification (emp_id, bin_id, type, not_time, url)
 					select distinct emp_id, ?, 'rp', now(), CONCAT('/load/', ?) from employee where code='0';`
@@ -76,6 +79,7 @@ module.exports = {
 				res.json({ err: err.errno })
 			} else {
 				ee.emit('alert-rp', results[1].insertId)
+				mqtt.publish('TrashMeasure/PC', `{"server": true, "bin_id": "${bin_id}"}`)
 				res.json({ err: 0 })
 			}
 		})
@@ -83,7 +87,8 @@ module.exports = {
 	replace: (req, res) => {
 		var { bin_id } = req.params
 		var { emp_id } = req.body
-		if (emp_id == undefined) { res.end(); return }
+		console.log('Replace:', emp_id, bin_id)
+		if (emp_id == undefined) { res.json({ err: 1 }); return }
 		var sql0 = `insert into replacement values (?, now(), ?);`
 		var sql1 = `insert into notification (emp_id, bin_id, type, not_time, url)
 					select distinct emp_id, ?, 'rp', now(), CONCAT('/load/', ?) from employee where code='0';`
@@ -94,6 +99,7 @@ module.exports = {
 				res.json({ err: err.errno })
 			} else {
 				ee.emit('alert-rp', results[1].insertId)
+				mqtt.publish('TrashMeasure/PC', `{"server": true, "bin_id": "${bin_id}"}`)
 				res.json({ err: 0 })
 			}
 		})
