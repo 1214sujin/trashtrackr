@@ -7,12 +7,12 @@ module.exports = {
 		var sql2 = `select * from bin;`
 		db.query(sql0+sql1+sql2, (err, results) => {
 			var context = {
+				body: 'bin_home.ejs',
 				gu_list: results[0],
 				dong_list: results[1],
 				bin_list: results[2]
 			}
-			res.json(context)
-			// req.app.render('test', context, (err, html) => res.send(html))
+			req.app.render('menu', context)
 		})
 	},
 	list: (req, res) => {
