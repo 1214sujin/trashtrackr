@@ -7,13 +7,13 @@ module.exports = {
     	res.end(fs.readFileSync(__dirname+'/../views/log_in.html'))
 	},
 	login: (req, res) => {
-		var { emp_id, password } = req.body
+		var { emp_id, password } = req.body	// code='0' (관리자)인 경우에만 웹 로그인 가능
 		var sql0 = `select * from employee where emp_id=? and password=? and code='0';`
 		db.query(sql0, [emp_id, password], (err, result) => {
 			if (result.length == 1) {
 				req.session.logined = true
 				req.session.empid = emp_id
-				res.send(`<script>location.href='/bin'</script>`)
+				res.json({ err: 0 })
 			} else {
 				res.json({ err: 1 })
 			}

@@ -27,6 +27,9 @@ app.use(session)
 app.use(express.json())
 app.use(express.urlencoded( {extended : false } ))
 
+//정적 파일 폴더 지정
+app.use(express.static(__dirname+'/public'))
+
 //로그인하지 않고 웹에 접속하는 경우 항상 로그인 페이지로 가도록 함
 app.use((req, res, next) => {
 	if (req.url[1]!='m' && req.url!='/login' && req.url!='/find-pw' && !req.session.logined) {
@@ -43,9 +46,6 @@ app.use('/fire', fireRouter)
 app.use('/use', useRouter)
 app.use('/noti', notiRouter)
 app.use('/m', mobileRouter)
-
-//정적 파일 폴더 지정
-app.use(express.static(__dirname+'/public'))
 
 const server = app.listen(port, () => {
 	process.on('SIGINT', () => {
