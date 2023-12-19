@@ -2,23 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Target Material Design Bootstrap Admin Template</title>
 	
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="/materialize/css/materialize.min.css" media="screen,projection" />
+	<link rel="stylesheet" href="public/materialize/css/materialize.min.css" media="screen,projection" />
     <!-- Bootstrap Styles-->
-    <link href="/css/bootstrap.css" rel="stylesheet" />
+    <link href="public/css/bootstrap.css" rel="stylesheet" />
     <!-- FontAwesome Styles-->
-    <link href="/css/font-awesome.css" rel="stylesheet" />
+    <link href="public/css/font-awesome.css" rel="stylesheet" />
     <!-- Morris Chart Styles-->
-    <link href="/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <link href="public/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
     <!-- Custom Styles-->
-    <link href="/css/custom-styles.css" rel="stylesheet" />
+    <link href="public/css/custom-styles.css" rel="stylesheet" />
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href="/js/Lightweight-Chart/cssCharts.css"> 
+    <link rel="stylesheet" href="public/js/Lightweight-Chart/cssCharts.css"> 
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=w9r7i54m41"></script>
 </head>
 <body>
     <div id="wrapper">
@@ -35,7 +36,7 @@
 		<div id="sideNav" class="waves-effect waves-dark" href=""><i class="material-icons dp48">toc</i></div>
             </div>
 
-            <ul class="nav navbar-top-links navbar-right"> 			
+            <ul class="nav navbar-top-links navbar-right">				
 				<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown2"><i class="fa fa-bell fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>
 				  <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>John Doe</b> <i class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
@@ -95,7 +96,7 @@
                             </a>
                         </li>
 </ul>
-<!--nav top-->
+
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
@@ -103,13 +104,13 @@
                         <a href="Waste_management.html" class="waves-effect waves-dark" ><i class="fa fa-desktop"></i>쓰레기통 관리</a>
                     </li>
                     <li>
-                        <a href="Load_management.html" class="waves-effect waves-dark"><i class="fa fa-file"></i>적재량 관리</a>
+                        <a href="Load_management.html"  class="active-menu waves-effect waves-dark"><i class="fa fa-file"></i>적재량 관리</a>
                     </li>
                     <li>
-                        <a href="Fire_detection.html"   class="waves-effect waves-dark"><i class="fa fa-edit"></i>화재감지</a>
+                        <a href="Fire_detection.html" class="waves-effect waves-dark"><i class="fa fa-edit"></i>화재감지</a>
                     </li>
                     <li>
-                        <a href="Utilization_status.html" class="active-menu waves-effect waves-dark"><i class="fa fa-sitemap"></i>이용현황<span class="fa arrow"></span></a>
+                        <a href="Utilization_status.html" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i>이용현황<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="동별이용현황.html">동 별 이용현황</a>
@@ -126,56 +127,115 @@
         <div id="page-wrapper">
             <div class="header"> 
                           <h1 class="page-header">
-                              이용현황
+                              적재량 관리 
                           </h1>
                           <ol class="breadcrumb">
-                        <li><a href="Waste_management.html">Home</a></li>
-                        <li><a href="Utilization_status.html">이용현황</a></li>
-                      </ol> 
-                                      
-          </div>
-              <div id="page-inner"> 
-              
+                            <li><a href="Waste_management.html">Home</a></li>
+                            <li><a href="Load_management.html">적재량 관리</a></li>
+                          </ol> 
+            </div>
+            <div id="page-inner">
                 <div class="row">
-                      
-                      <div class="col-md-12">
-                        어케
-                      <div class="card">
+                    <div class="col-sm-6">
+                        <tbody>
+                            <tr>
+                                <th scope="row">
+                                    <label>구 : 
+                                        <label>
+                                            <select name="gu" id="trash_gu" class="form-control input-sm">
+                                                <option value="수정구">수정구</option>
+                                                <option value="중원구">중원구</option>
+                                                <option value="분당구">분당구</option>
+                                            </select>
+                                        </label>
+                                    </label>
+                                </th>
+                                <th scope="row">
+                                    <label>동 : 
+                                        <label>
+                                            <select name="dong" id="trash_dong" class="form-control input-sm">
+                                                <option value="수정동">수정동</option>
+                                                <option value="수진동">수진동</option>
+                                                <option value="태평동">태평동</option>
+                                            </select>
+                                        </label>
+                                    </label>
+                                </th>
+                            </tr>
+                        </tbody>
+    
+                        <button type="button" class="btn btn-primary color-bottom">조회</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 text-center" style="width: 30%;">
+                            <div class="card-action" style="width:100">
+                                <div class="card-content" >
+                                    <ul class="collapsible" data-collapsible="accordion" >
+                                        <li>
+                                            <div class="collapsible-header">VS1234</div>
+                                        </li>
+                                        <li>
+                                            <div class="collapsible-header">VJ3942</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                    </div>
+            
+                    <div class="col-md-6 col-sm-6 text-right" style="width: 70%;">
+                        <div class="card">
+                            <div class="card-action" >
+                                <div id="map" style="width:100%; height:300px;"></div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+    
+    
+    
+                        </div>
                         
-                          <div class="card-action">
-                           동 별 이용현황
-                          </div>        
-                           <div class="card-content"> 
-                           <p> olore eu fugiat nulla pariatur.</p>
-                             <div class="clearBoth"><br/></div>
-                              
-                           </div>
-                           </div>
-                                      
-  
+                                          
+      
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                      </div>
+                   <!-- /. PAGE INNER  -->
                   </div>
-               <!-- /. PAGE INNER  -->
+               <!-- /. PAGE WRAPPER  -->
               </div>
-           <!-- /. PAGE WRAPPER  -->
-          </div>
-       <!-- /. WRAPPER  -->
-      <!-- JS Scripts-->
-      <!-- jQuery Js -->
-      <script src="/js/jquery-1.10.2.js"></script>
+           <!-- /. WRAPPER  -->
+          <!-- JS Scripts-->
+          <!-- jQuery Js -->
+    
+          <script src="public/js/jquery-1.10.2.js"></script>
+          <!-- Bootstrap Js -->
+          <script src="public/js/bootstrap.min.js"></script>
+          
+          <script src="public/materialize/js/materialize.min.js"></script>
+          
+          <!-- Metis Menu Js -->
+              <script src="public/js/jquery.metisMenu.js"></script> 
+          <!-- Custom Js -->
+          <script src="public/js/custom-scripts.js"></script> 
+          <script src="public/js/쓰레기통_관리.js"></script>
+          <script src="public/js/maps.js"></script>
+    
+          
+       
       
-      <!-- Bootstrap Js -->
-      <script src="/js/bootstrap.min.js"></script>
-      
-      <script src="/materialize/js/materialize.min.js"></script>
-      
-      <!-- Metis Menu Js -->
-          <script src="/js/jquery.metisMenu.js"></script> 
-      <!-- Custom Js -->
-      <script src="/js/custom-scripts.js"></script> 
-      <script src="쓰레기통_관리.js"></script>
-      
-   
-  
-</body>
-
-</html>
+    </body>
+    
+    </html>
+    

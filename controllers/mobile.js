@@ -19,6 +19,7 @@ module.exports = {
 		})
 	},
 	list: (req, res) => {
+		var { pos } = req.params
 		var sql0 = `select b.bin_id, gu, dong, lat, lon, install_date,
 						amount, date_format(load_time, '%H:%i:%s') as load_time, rp_time, emp_id, fire_time
 					from bin b join pos_dong on pos=dong_id join pos_gu on p_gu=gu_id
@@ -27,8 +28,9 @@ module.exports = {
 					left join ( select * from replacement where (bin_id, rp_time)
 						in (select bin_id, max(rp_time) from replacement group by bin_id) ) as r on b.bin_id=r.bin_id
 					left join ( select * from fire where (bin_id, fire_time)
-						in (select bin_id, max(fire_time) from fire group by bin_id) ) as f on b.bin_id=f.bin_id;`
-		db.query(sql0, (err, result) => {
+						in (select bin_id, max(fire_time) from fire group by bin_id) ) as f on b.bin_id=f.bin_id
+					where pos=?;`
+		db.query(sql0, [pos], (err, result) => {
 			if (err) {
 				console.error(err.sqlMessage)
 				console.error(err.sql)
@@ -40,14 +42,15 @@ module.exports = {
 		})
 	},
 	alarm: (req, res) => {
-		var sql0 = "select * from (select l.bin_id, gu, dong, amount, l.load_time as time, null as fire, load_img as img from loadage l\
+		var { pos } = req.params
+		var sql0 = "select * from (select l.bin_id, gu, dong, amount, l.load_time as time, null as fire, load_img as img, pos from loadage l\
 					join alarm a on l.bin_id=a.bin_id and l.load_time=a.load_time\
 					join bin b on b.bin_id=l.bin_id join pos_dong on pos=dong_id join pos_gu on p_gu=gu_id\
 					union\
-					select f.bin_id, gu, dong, null as amount, fire_time as time, 'true' as fire, fire_img as img from fire f\
+					select f.bin_id, gu, dong, null as amount, fire_time as time, 'true' as fire, fire_img as img, pos from fire f\
 					join bin b on b.bin_id=f.bin_id join pos_dong on pos=dong_id join pos_gu on p_gu=gu_id\
-					group by bin_id, time) as s order by time desc;"	// 모니터링을 위해 alarm 창에서는 모든 fire정보를 넘김 (알림은 최초만)
-		db.query(sql0, (err, result) => {
+					group by bin_id, time, pos) as s where pos=? order by time desc;"	// 모니터링을 위해 alarm 창에서는 모든 fire정보를 넘김 (알림은 최초만)
+		db.query(sql0, [pos], (err, result) => {
 			if (err) {
 				console.error(err.sqlMessage)
 				console.error(err.sql)
@@ -58,7 +61,7 @@ module.exports = {
 					'alarm_list': result,
 				}
 				for (let i=0; i<result.length; i++) {
-					let image = fs.readFileSync(__dirname+'/../public/images/'+result[i].img);
+					let image = fs.readFileSync(__dirname+'/../public/images'+result[i].img)
 					data.alarm_list[i].img = Buffer.from(image).toString('base64')
 				}
 				res.json(data)
@@ -106,15 +109,15 @@ module.exports = {
 	},
 	// 로그인이나 정보 수정 시 사용자의 정보를 모바일에 전송 (정보 확인 시마다 요청하지 않아도 되도록)
 	login: (req, res) => {
-		var { emp_id, password } = req.body
+		var { id, password } = req.body
 		var sql0 = `select * from employee where emp_id=? and password=?;`
-		db.query(sql0, [emp_id, password], (err, result) => {
+		db.query(sql0, [id, password], (err, result) => {
 			if (result.length == 0) {
 				res.json({ err: 1 })
 			} else {
-				var sql1 = `select emp_id, name, tel, gu, dong from employee
+				var sql1 = `select emp_id, name, tel, gu, dong, pos from employee
 				join pos_dong on pos=dong_id join pos_gu on p_gu=gu_id where emp_id=?;`
-				db.query(sql1, [emp_id], (err, result) => {
+				db.query(sql1, [id], (err, result) => {
 					res.json({ err: 0, emp_info: result })
 				})
 			}
@@ -138,7 +141,7 @@ module.exports = {
 						else res.json({err: err.errno})
 					} else {
 						// 업데이트 정상 수행 시 회원 정보 전송
-						var sql2 = `select name, tel, gu, dong from employee
+						var sql2 = `select name, tel, gu, dong, pos from employee
 									join pos_dong on pos=dong_id join pos_gu on p_gu=gu_id where emp_id=?;`
 						db.query(sql2, [emp_id], (err, result) => {
 							res.json({ err: 0, emp_info: result })

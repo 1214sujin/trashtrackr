@@ -3,7 +3,7 @@ const app = express()
 var port = 60036
 const websocket = require('ws')
 
-app.set('views', __dirname + '/public/views')
+app.set('views', __dirname + '/views')
 app.set('view engine', 'ejs')
 
 //사용자 정의 라우터 모듈

@@ -6,5 +6,5 @@
     "watch_options": {
         "dot": true
     },
-    "ignore_watch": ["public/*", ".git/*"]
+    "ignore_watch": ["public/images/*", ".git/*"]
 }]}

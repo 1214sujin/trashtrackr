@@ -37,8 +37,8 @@ module.exports = {
 	},
 	pic: (req, res) => {
 		var { bin_id } = req.params
-		mqtt.publish('TrashPhoto', `{"server": true,"bin_id": ${bin_id}`)
-		res.json({data: '/loading.jpg'})
+		mqtt.publish('TrashPhoto/PC', `{"server": true,"bin_id": ${bin_id}`)
+		res.json({data: '/images/loading.jpg'})
 	},
 	pic_wait: (req, res) => {
 		res.writeHead(200, {
@@ -49,7 +49,7 @@ module.exports = {
 		res.flushHeaders()
 	
 		ee.once('photo', () => {
-			let data = {type: 'photo', data: '/monitor.jpg'}
+			let data = {type: 'photo', data: '/images/monitor.jpg'}
 			console.log(`${JSON.stringify(data)}`)
 			res.write(`data: ${JSON.stringify(data)}\n\n`)
 			res.end()

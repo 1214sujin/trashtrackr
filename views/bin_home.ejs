@@ -1,0 +1,76 @@
+<div class="header">
+	<h1 class="page-header">
+		쓰레기통 관리
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="Waste_management.html">Home</a></li>
+		<li><a href="Utilization_status.html">쓰레기 관리</a></li>
+	</ol>
+
+</div>
+<div id="page-inner">
+	<div class="row">
+		<div class="col-sm-6">
+			<tbody>
+				<tr>
+					<th scope="row">
+						<label>구 :
+							<select name="gu" id="trash_gu" class="form-control input-sm" onchange="updateDong()">
+								<option value="all">전체</option>
+								<% for (let i=0; i<gu_list.length; i++) {%>
+								<option value="<%= gu_list[i].gu_id %>" data-group="<%= gu_list[i].gu_id %>"><%= gu_list[i].gu %></option>
+								<%} %>
+							</select>
+						</label>
+					</th>
+					<th scope="row">
+						<label>동 :
+							<select name="dong" id="trash_dong" class="form-control input-sm">
+								<option value="_"> </option>
+								<% for (let i=0; i<dong_list.length; i++) {%>
+								<option value="<%= dong_list[i].dong_id %>" data-group="<%= dong_list[i].p_gu %>"><%= dong_list[i].dong %></option>
+								<%} %>
+							</select>
+						</label>
+					</th>
+				</tr>
+			</tbody>
+
+			<button type="button" class="btn btn-primary color-bottom" onclick="updateBins()">조회</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-sm-6 text-center" style="width: 30%;">
+			쓰레기통 목록
+			<div class="card-action" style="width:100">
+				<div class="card-content">
+					<ul class="collapsible" data-collapsible="accordion">
+						<% for (let i=0; i<bin_list.length; i++) {%>
+						<li data-group="<%= bin_list[i].pos %>" id="trash_bin" onclick="chooseBin(this)" lat="<%= bin_list[i].lat %>" lon="<%= bin_list[i].lon %>">
+							<div class="collapsible-header"><%= bin_list[i].bin_id %></div>
+						</li>
+						<%} %>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6 col-sm-6 text-right" style="width: 70%;">
+			<button id="addNewItem" type="button" class="btn btn-primary color-bottom">신규</button>
+			<button id="deleteItem" type="button" class="btn btn-info color-bottom">삭제</button>
+			<button id="saveState" type="button" class="btn btn-danger color-bottom">저장</button>
+
+			<div class="card">
+				<div class="card-action">
+					쓰레기통 상세정보
+					<div id="map" style="width:100%;height:300px;"></div>
+					
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="/js/쓰레기통_관리.js"></script>
+<script src="/js/choose-dong.js"></script>

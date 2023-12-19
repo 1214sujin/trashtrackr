@@ -1,0 +1,96 @@
+        <!--nav side, 위치 설명-->
+        <div id="page-wrapper">
+            <div class="header"> 
+                          <h1 class="page-header">
+                              동 내 이용현황 
+                          </h1>
+                          <ol class="breadcrumb">
+                        <li><a href="Waste_management.html">Home</a></li>
+                        <li><a href="Utilization_status.html">이용현황</a></li>
+                        <li><a href="동내이용현황.html">동내이용현황</a></li>
+                      </ol> 
+                                      
+          </div>
+          <div id="page-inner"> 
+            <div class="row">
+                <div class="col-sm-6">
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label>구 : 
+                                    <label>
+                                        <select name="gu" id="trash_gu" class="form-control input-sm">
+                                            <option value="수정구">수정구</option>
+                                            <option value="중원구">중원구</option>
+                                            <option value="분당구">분당구</option>
+                                        </select>
+                                    </label>
+                                </label>
+                            </th>
+                            <th scope="row">
+                                <label>동 : 
+                                    <label>
+                                        <select name="dong" id="trash_dong" class="form-control input-sm">
+                                            <option value="수정동">수정동</option>
+                                            <option value="수진동">수진동</option>
+                                            <option value="태평동">태평동</option>
+                                        </select>
+                                    </label>
+                                </label>
+                            </th>
+                            <th scope="row">
+                                <label><input type="date"></label>
+                                <span> ~ </span>
+                                <label><input type="date"></label>
+                            </th>
+                        </tr>
+                    </tbody>
+                    <button type="button" class="btn btn-primary color-bottom">조회</button>
+
+                </div>
+            </div>
+
+            <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="card">
+                            <div class="card-action">
+                                분당구 내 쓰레기통 교체 수 상위5
+                            </div>
+                            <div class="card-content">
+                                <ul class="collapsible" data-collapsible="accordion">
+                                    <li>
+                                        <div class="collapsible-header">TOP1 구미동 평균 15,200회</div>
+                                        <div class="collapsible-header">TOP1 궁내동 평균 15,002회</div>
+                                        <div class="collapsible-header">TOP1 금곡동 평균 14,874회</div>
+                                        <div class="collapsible-header">TOP1 백현동 평균 12,291회</div>
+                                        <div class="collapsible-header">TOP1 도촌동 평균 12,200회</div>
+                                    </li>
+                                </ul>
+                            </div>
+    
+                            <div class="card-action">
+                                분당구 내 쓰레기통 교체 수 하위5
+                            </div>
+                            <div class="card-content">
+                                <ul class="collapsible" data-collapsible="accordion">
+                                    <li>
+                                        <div class="collapsible-header">TOP1 삼평동 평균 5,234회</div>
+                                        <div class="collapsible-header">TOP1 서현동 평균 5,300회</div>
+                                        <div class="collapsible-header">TOP1 수내동 평균 5,903회</div>
+                                        <div class="collapsible-header">TOP1 야탑동 평균 6,219회</div>
+                                        <div class="collapsible-header">TOP1 율동 평균 6,298회</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="card-action">      
+                            </div>
+                            <div class="card-content">
+                                <canvas id="cvs" style="width: 80%;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+            </div>

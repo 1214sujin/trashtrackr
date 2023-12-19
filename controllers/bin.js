@@ -8,11 +8,12 @@ module.exports = {
 		db.query(sql0+sql1+sql2, (err, results) => {
 			var context = {
 				body: 'bin_home.ejs',
+				active: ['active-menu','','','',''],
 				gu_list: results[0],
 				dong_list: results[1],
 				bin_list: results[2]
 			}
-			req.app.render('menu', context)
+			req.app.render('menu', context, (err, html) => {if(err)console.error(err); res.send(html)})
 		})
 	},
 	list: (req, res) => {

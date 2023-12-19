@@ -20,7 +20,7 @@ router.get('/test', (req, res) => {
 })
 router.get('/photo', (req, res) => {
 	setTimeout(() => ee.emit('photo'), 1000)
-	res.json({data: '/loading.jpg'})
+	res.json({data: '/images/loading.jpg'})
 })
 router.get('/photo/wait', (req, res) => {
 	res.writeHead(200, {
@@ -31,7 +31,7 @@ router.get('/photo/wait', (req, res) => {
 	res.flushHeaders()
 
 	ee.once('photo', () => {
-		let data = {type: 'photo', data: '/monitor.jpg'}
+		let data = {type: 'photo', data: '/images/monitor.jpg'}
 		console.log(`${JSON.stringify(data)}`)
 		res.write(`data: ${JSON.stringify(data)}\n\n`)
 		res.end()
