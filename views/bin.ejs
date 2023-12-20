@@ -15,22 +15,22 @@
 				<tr>
 					<th scope="row">
 						<label>구 :
-							<select name="gu" id="trash_gu" class="form-control input-sm" onchange="updateDong()">
+							<label><select name="gu" id="trash_gu" class="form-control input-sm" onchange="updateDong()">
 								<option value="all">전체</option>
 								<% for (let i=0; i<gu_list.length; i++) {%>
 								<option value="<%= gu_list[i].gu_id %>" data-group="<%= gu_list[i].gu_id %>"><%= gu_list[i].gu %></option>
 								<%} %>
-							</select>
+							</select></label>
 						</label>
 					</th>
 					<th scope="row">
 						<label>동 :
-							<select name="dong" id="trash_dong" class="form-control input-sm">
+							<label><select name="dong" id="trash_dong" class="form-control input-sm">
 								<option value="_"> </option>
 								<% for (let i=0; i<dong_list.length; i++) {%>
 								<option value="<%= dong_list[i].dong_id %>" data-group="<%= dong_list[i].p_gu %>"><%= dong_list[i].dong %></option>
 								<%} %>
-							</select>
+							</select></label>
 						</label>
 					</th>
 				</tr>

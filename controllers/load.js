@@ -8,12 +8,15 @@ module.exports = {
 		var sql1 = `select * from pos_dong;`
 		var sql2 = `select * from bin;`
 		db.query(sql0+sql1+sql2, (err, results) => {
-			var data = {
+			var context = {
+				body: 'load.ejs',
+				name: req.session.name,
+				active: ['','active-menu','','',''],
 				gu_list: results[0],
 				dong_list: results[1],
 				bin_list: results[2]
 			}
-			res.json(data)
+			req.app.render('menu', context, (err, html) => {if(err)console.error(err); res.send(html)})
 		})
 	},
 	view: (req, res) => {

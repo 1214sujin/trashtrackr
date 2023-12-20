@@ -13,6 +13,7 @@ module.exports = {
 			if (result.length == 1) {
 				req.session.logined = true
 				req.session.empid = emp_id
+				req.session.name = result[0].name
 				res.json({ err: 0 })
 			} else {
 				res.json({ err: 1 })

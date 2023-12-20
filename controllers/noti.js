@@ -3,8 +3,8 @@ const ee = require('../lib/alert')
 
 module.exports = {
 	list: (req, res) => {
-		let sql0 = `select * from notification;`
-		db.query(sql0, (err, result) => { res.json({result}) })
+		let sql0 = `select * from notification where emp_id=?;`
+		db.query(sql0, [req.session.empid], (err, result) => { res.json({result}) })
 	},
 	check: (req, res) => {
 		var { not_id } = req.params

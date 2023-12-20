@@ -5,7 +5,13 @@ module.exports = {
 	info: (req, res) => {
 		var sql0 = `select emp_id, name, tel from employee where emp_id=?;`
 		db.query(sql0, [req.session.empid], (err, result) => {
-			res.json(result)
+			var context = {
+				body: 'mypage.ejs',
+				name: req.session.name,
+				active: ['','','','',''],
+				emp: result[0]
+			}
+			req.app.render('menu', context, (err, html) => {if(err)console.error(err); res.send(html)})
 		})
 	},
 	info_process: (req, res) => {

@@ -7,7 +7,8 @@ module.exports = {
 		var sql2 = `select * from bin;`
 		db.query(sql0+sql1+sql2, (err, results) => {
 			var context = {
-				body: 'bin_home.ejs',
+				body: 'bin.ejs',
+				name: req.session.name,
 				active: ['active-menu','','','',''],
 				gu_list: results[0],
 				dong_list: results[1],

@@ -40,11 +40,11 @@
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
-                <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown2"><i
-                            class="fa fa-bell fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>
-                <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i
-                            class="fa fa-user fa-fw"></i> <b>John Doe</b> <i
-                            class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a class="dropdown-button waves-effect waves-dark" data-activates="dropdown2"> <!-- onclick="getAlert(this)"> -->
+                    <i class="fa fa-bell fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a class="dropdown-button waves-effect waves-dark" data-activates="dropdown1">
+                    <i class="fa fa-user fa-fw"></i> <b><%= name %></b>
+                    <i class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
         </nav>
 
@@ -52,57 +52,16 @@
 
         <!-- Dropdown Structure -->
         <ul id="dropdown1" class="dropdown-content">
-            <li><a href="#"><i class="fa fa-user fa-fw"></i> My Profile</a>
+            <li><a href="/user/info"><i class="fa fa-user fa-fw"></i> My Profile</a>
             </li>
-            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-            </li>
-            <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-            </li>
-            <li><a href="#"><i class="fa fa-upload fa-fw"></i> Server Rebooted</a>
+            <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
             </li>
         </ul>
         <ul id="dropdown2" class="dropdown-content w250">
             <li>
-                <a href="#">
-                    <div>
-                        <i class="fa fa-comment fa-fw"></i> 화재감지 발생
-                        <span class="pull-right text-muted small">4 min ago</span>
-                    </div>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href="#">
-                    <div>
-                        <i class="fa fa-envelope fa-fw"></i> 쓰레기통 봉투 교체 발생
-                        <span class="pull-right text-muted small">43 min ago</span>
-                    </div>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href="#">
-                    <div>
-                        <i class="fa fa-envelope fa-fw"></i> 쓰레기통 봉투 교체 발생
-                        <span class="pull-right text-muted small">4 hour ago</span>
-                    </div>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href="#">
-                    <div>
-                        <i class="fa fa-comment fa-fw"></i> 화재 감지 발생
-                        <span class="pull-right text-muted small">14 day ago</span>
-                    </div>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a class="text-center" href="#">
-                    <strong>See All Alerts</strong>
-                    <i class="fa fa-angle-right"></i>
-                </a>
+                <div>
+                    <i class="fa fa-comment fa-fw"></i> 미확인 알림이 존재하지 않습니다
+                </div>
             </li>
         </ul>
         <!--nav top-->
@@ -110,30 +69,22 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                     <li>
-                        <a href="Waste_management.html" class="<%=active[0]%> waves-effect waves-dark"><i class="fa fa-desktop"></i>쓰레기통 관리</a>
+                        <a href="/bin" class="<%=active[0]%> waves-effect waves-dark"><i class="fa fa-desktop"></i>쓰레기통 관리</a>
                     </li>
                     <li>
-                        <a href="Load_management.html" class="<%=active[1]%> waves-effect waves-dark"><i class="fa fa-file"></i>적재량 관리</a>
+                        <a href="/load" class="<%=active[1]%> waves-effect waves-dark"><i class="fa fa-file"></i>적재량 관리</a>
                     </li>
                     <li>
-                        <a href="Fire_detection.html" class="<%=active[2]%> waves-effect waves-dark"><i class="fa fa-edit"></i>화재감지</a>
+                        <a href="/fire" class="<%=active[2]%> waves-effect waves-dark"><i class="fa fa-edit"></i>화재감지</a>
                     </li>
-                    <li>
+                    <li <% if (active[3]!=active[4]) {%>class="active"<%} %>>
                         <a id="sidebar-menu" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i>이용현황<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <!-- <% if (active[3]=='') {%> -->
-                                    <a href="동별이용현황.html">동 별 이용현황</a>
-                                <!-- <%} else {%>
-                                    <a href="동별이용현황.html" class="<%=active[3]%> active-menu waves-effect waves-dark">동 별 이용현황</a>
-                                <%} %> -->
+                                <a href="/use/gu" <% if (active[3]!='') {%>class="<%=active[3]%> active-menu waves-effect waves-dark"<%} %>>동별 이용현황</a>
                             </li>
                             <li>
-                                <!-- <% if (active[3]=='') {%> -->
-                                    <a href="동내이용현황.html">동 내 이용현황</a>
-                                <!-- <%} else {%>
-                                    <a href="동내이용현황.html" class="<%=active[4]%> active-menu waves-effect waves-dark">동 내 이용현황</a>
-                                <%} %> -->
+                                <a href="/use/dong" <% if (active[4]!='') {%>class="<%=active[4]%> active-menu waves-effect waves-dark"<%} %>>동 내 이용현황</a>
                             </li>
                         </ul>
                     </li>
@@ -145,7 +96,7 @@
         <div id="page-wrapper">
             <%- include(body) %>
         </div>
-        
+
     <!-- /. PAGE WRAPPER  -->
     </div>
     <!-- /. WRAPPER  -->
@@ -166,7 +117,8 @@
         });
     </script>
     <!-- Custom Js -->
-    <script src="/js/custom-scripts.js"></script> 
+    <script src="/js/custom-scripts.js"></script>
+    <script src="/js/alert.js"></script>
 
 </body>
 

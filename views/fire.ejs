@@ -1,0 +1,76 @@
+<div class="header">
+	<h1 class="page-header">
+		화재감지
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="Waste_management.html">Home</a></li>
+		<li><a href="Fire_detection.html">화재감지</a></li>
+	</ol>
+
+</div>
+<div id="page-inner">
+	<div class="row">
+		<div class="col-sm-6">
+			<tbody>
+				<tr>
+					<th scope="row">
+						<label>구 :
+							<label><select name="gu" id="trash_gu" class="form-control input-sm" onchange="updateDong()">
+									<option value="all">전체</option>
+									<% for (let i=0; i<gu_list.length; i++) {%>
+										<option value="<%= gu_list[i].gu_id %>" data-group="<%= gu_list[i].gu_id %>">
+										<%= gu_list[i].gu %></option>
+									<%} %>
+								</select></label>
+						</label>
+					</th>
+					<th scope="row">
+						<label>동 :
+							<label><select name="dong" id="trash_dong" class="form-control input-sm">
+									<option value="_"> </option>
+									<% for (let i=0; i<dong_list.length; i++) {%>
+										<option value="<%= dong_list[i].dong_id %>" data-group="<%= dong_list[i].p_gu %>">
+										<%= dong_list[i].dong %></option>
+									<%} %>
+								</select></label>
+						</label>
+					</th>
+					<th scope="row">
+						<label><input type="date" id="start"></label>
+						<span> ~ </span>
+						<label><input type="date" id="end"></label>
+					</th>
+				</tr>
+			</tbody>
+
+			<button type="button" class="btn btn-primary color-bottom" onclick="updateBinsF()">조회</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-sm-6 text-center" style="width: 30%;">
+			<div class="card-action" style="width:100">
+				<div class="card-content">
+					<ul class="collapsible" data-collapsible="accordion" id="binList">
+						<li>
+							<div class="collapsible-header">VS1234</div>
+						</li>
+						<li>
+							<div class="collapsible-header">VJ3942</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-6 col-sm-6 text-right" style="width: 70%;">
+	<div class="card">
+		<div class="card-action">
+			쓰레기통 상세정보
+		</div>
+	</div>
+</div>
+
+<script src="/js/choose-dong.js"></script>
+<script src="/js/date.js"></script>
