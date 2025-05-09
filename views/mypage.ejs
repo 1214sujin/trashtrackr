@@ -1,0 +1,44 @@
+<div class="header"> 
+	<h1 class="page-header">
+		동 별 이용현황 
+	</h1>
+	<ol class="breadcrumb">
+  <li><a href="Waste_management.html">Home</a></li>
+  <li><a href="Utilization_status.html">이용현황</a></li>
+  <li><a href="동별이용현황.html">동별이용현황</a></li>
+</ol> 
+				
+</div>
+<div id="page-inner"> 
+<div class="row">
+<div class="col-lg-6">
+<div id="tab_box" class="tab_box">
+  <ul>
+	  <li onclick="javascript:changeTab('1')";>
+	  <a href="javascript:;">개인정보</a></li>
+	  <li onclick="javascript:changeTab('2');"><a href=javascript:;>비밀번호</a></li>
+	  <li onclick="javascript:changeTab('3')";><a href=javascript:;>회원탈퇴</a></li>
+  </ul>
+</div>
+<div class="sub_search_area">
+  <div class="sub_search_box">
+	  <div id="addrTable">
+		  <ul id="infoUI">
+			  <li>
+				  <dl>
+					  <dt class="tit">사번</dt>
+					  <dd class="cont"><%= emp.emp_id %></dd>
+				  </dl>
+				  <dl>
+					  <dt class="tit">성명</dt>
+					  <dd class="cont"><%= emp.name %></dd>
+				  </dl>
+				  <dl>
+					  <dt class="tit">휴대폰 번호</dt>
+					  <dd class="cont"><%= emp.tel %></dd>
+				  </dl>
+			  </li>
+		  </ul>
+	  </div>
+  </div>
+</div>

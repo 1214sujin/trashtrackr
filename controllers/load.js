@@ -8,12 +8,15 @@ module.exports = {
 		var sql1 = `select * from pos_dong;`
 		var sql2 = `select * from bin;`
 		db.query(sql0+sql1+sql2, (err, results) => {
-			var data = {
+			var context = {
+				body: 'load.ejs',
+				name: req.session.name,
+				active: ['','active-menu','','',''],
 				gu_list: results[0],
 				dong_list: results[1],
 				bin_list: results[2]
 			}
-			res.json(data)
+			req.app.render('menu', context, (err, html) => {if(err)console.error(err); res.send(html)})
 		})
 	},
 	view: (req, res) => {
@@ -37,8 +40,8 @@ module.exports = {
 	},
 	pic: (req, res) => {
 		var { bin_id } = req.params
-		mqtt.publish('TrashPhoto', `{"server": true,"bin_id": ${bin_id}`)
-		res.json({data: '/loading.jpg'})
+		mqtt.publish('TrashPhoto/PC', `{"server": true,"bin_id": ${bin_id}`)
+		res.json({data: '/images/loading.jpg'})
 	},
 	pic_wait: (req, res) => {
 		res.writeHead(200, {
@@ -49,7 +52,7 @@ module.exports = {
 		res.flushHeaders()
 	
 		ee.once('photo', () => {
-			let data = {type: 'photo', data: '/monitor.jpg'}
+			let data = {type: 'photo', data: '/images/monitor.jpg'}
 			console.log(`${JSON.stringify(data)}`)
 			res.write(`data: ${JSON.stringify(data)}\n\n`)
 			res.end()

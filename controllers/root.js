@@ -4,7 +4,7 @@ const fs = require('fs')
 module.exports = {
 	login_home: (req, res) => {
 		res.writeHead(200, { 'Content-Type':'text/html'})
-    	res.end(fs.readFileSync(__dirname+'/../views/login.html'))
+    	res.end(fs.readFileSync('views/log_in.html'))
 	},
 	login: (req, res) => {
 		var { emp_id, password } = req.body
@@ -13,7 +13,8 @@ module.exports = {
 			if (result.length == 1) {
 				req.session.logined = true
 				req.session.empid = emp_id
-				res.send(`<script>location.href='/bin'</script>`)
+				req.session.name = result[0].name
+				res.json({ err: 0 })
 			} else {
 				res.json({ err: 1 })
 			}
